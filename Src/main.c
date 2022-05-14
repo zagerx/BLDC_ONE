@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -36,7 +37,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+extern TIM_HandleTypeDef htim14;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -73,6 +74,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+    uint16_t pwmVal=0;   //PWM占空�?  
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -84,22 +86,41 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_TIM1_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim14);
+  HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
-    HAL_Delay(500);
-    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
-    HAL_Delay(500);
-
+    // if(READ_KEY1() == GPIO_PIN_SET)
+    // {
+    //   RED_ON;
+    // }else{
+    //   RED_OFF;
+    // }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+  while (pwmVal< 500)
+	  {
+		  pwmVal++;
+		  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�?
+//		  TIM3->CCR1 = pwmVal;   
+		  HAL_Delay(1);
+	  }
+	  while (pwmVal)
+	  {
+		  pwmVal--;
+		  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�?
+//		  TIM3->CCR1 = pwmVal; 
+		  HAL_Delay(1);
+	  }
+	  HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
