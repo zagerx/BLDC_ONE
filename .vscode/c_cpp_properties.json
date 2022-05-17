@@ -1,0 +1,25 @@
+{
+  "env": {
+    "myDefaultIncludePath": ["${workspaceFolder}/**"],
+    "myCompilerPath": "D:/Program Files (x86)/gcc-arm-none-eabi-10-2020-q4-major-win32/tool/bin"  
+  },
+  "configurations": [
+    {
+      "name": "nordic",
+      "intelliSenseMode": "windows-gcc-arm",
+      "includePath": ["${myDefaultIncludePath}"],
+      "defines": ["USE_HAL_DRIVER","STM32F051x8"],
+      //"forcedInclude": ["${workspaceFolder}/include/config.h"],
+     "compilerPath": "D:/Program Files (x86)/gcc-arm-none-eabi-10-2020-q4-major-win32/tool/bin/arm-none-eabi-gcc.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+//      "compileCommands": "/path/to/compile_commands.json",
+      "browse": {
+        "path": ["${workspaceFolder}/**"],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      }
+    }
+  ],
+  "version": 4
+}

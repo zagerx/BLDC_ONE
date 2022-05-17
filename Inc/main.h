@@ -58,6 +58,7 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define PWM_FREQ 3199
 #define U_L_Pin GPIO_PIN_7
 #define U_L_GPIO_Port GPIOA
 #define V_L_Pin GPIO_PIN_0
@@ -80,8 +81,8 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 
 #define READ_KEY1()  HAL_GPIO_ReadPin(KEY1_GPIO_Port,KEY1_Pin)
-#define RED_ON     HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
-#define RED_OFF    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
+#define RED_ON       HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
+#define RED_OFF      HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
 
 #define GREEN_ON     HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_RESET);
 #define GREEN_OFF    HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_SET);

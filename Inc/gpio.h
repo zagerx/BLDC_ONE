@@ -32,6 +32,13 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
+#define _U_L_ON_  HAL_GPIO_WritePin(U_L_GPIO_Port, U_L_Pin, GPIO_PIN_SET)
+#define _V_L_ON_  HAL_GPIO_WritePin(V_L_GPIO_Port, V_L_Pin, GPIO_PIN_SET)
+#define _W_L_ON_  HAL_GPIO_WritePin(W_L_GPIO_Port, W_L_Pin, GPIO_PIN_SET)
+
+#define _U_L_OFF_  HAL_GPIO_WritePin(U_L_GPIO_Port, U_L_Pin, GPIO_PIN_RESET)
+#define _V_L_OFF_  HAL_GPIO_WritePin(V_L_GPIO_Port, V_L_Pin, GPIO_PIN_RESET)
+#define _W_L_OFF_  HAL_GPIO_WritePin(W_L_GPIO_Port, W_L_Pin, GPIO_PIN_RESET)
 
 /* USER CODE END Private defines */
 

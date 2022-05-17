@@ -35,7 +35,17 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN Private defines */
+#define CH1_PWM_START HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1)
+#define CH2_PWM_START HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2)
+#define CH3_PWM_START HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3)
 
+#define CH1_PWM_STOP HAL_TIM_PWM_Stop(&htim1,TIM_CHANNEL_1)
+#define CH2_PWM_STOP HAL_TIM_PWM_Stop(&htim1,TIM_CHANNEL_2)
+#define CH3_PWM_STOP HAL_TIM_PWM_Stop(&htim1,TIM_CHANNEL_3)
+
+#define SET_CH1_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1,duty)
+#define SET_CH2_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2,duty)
+#define SET_CH3_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_3,duty)
 /* USER CODE END Private defines */
 
 void MX_TIM1_Init(void);

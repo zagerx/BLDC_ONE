@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bldc_driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,7 +74,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
-    uint16_t pwmVal=0;   //PWM占空�?  
+  // uint16_t pwmVal=0;   //PWM占空
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -89,8 +89,12 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim14);
-  HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1);
+  // HAL_TIM_Base_Start_IT(&htim14);
+  RED_ON;
+  HAL_Delay(3000);
+  RED_OFF;
+  GREEN_ON;
+  motor_start();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,21 +110,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  while (pwmVal< 500)
-	  {
-		  pwmVal++;
-		  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�?
-//		  TIM3->CCR1 = pwmVal;   
-		  HAL_Delay(1);
-	  }
-	  while (pwmVal)
-	  {
-		  pwmVal--;
-		  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�?
-//		  TIM3->CCR1 = pwmVal; 
-		  HAL_Delay(1);
-	  }
-	  HAL_Delay(200);
+  // while (pwmVal< 500)
+	//   {
+	// 	  pwmVal++;
+	// 	  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�??
+	// 	  HAL_Delay(1);
+	//   }
+	//   while (pwmVal)
+	//   {
+	// 	  pwmVal--;
+	// 	  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�??
+	// 	  HAL_Delay(1);
+	//   }
+	//   HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
