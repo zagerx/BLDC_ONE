@@ -60,41 +60,34 @@ static void motor_forcedrag(void)
 
   /*开始强拖 使能强拖定时器*/
   ENABLE_FORCEDRAG_TIM();
-  /*设置当前频率为初始频率 */
-  Motor_1.forcedrag_curfreq = FORCEDRAG_STARTFREQ;//2400 / 10 = 240
-
 }
 /*
-**换相周期(500us)定时器回调函数
+**换相周期(50us)定时器回调函数
+1000US   500US
 **1、空载拖动到1000Rmp  1000Rmp--->T换相:
 */
+unsigned long forcedrag_curT = 1500;
 void changedir_callbaack(void)
 {
-  static unsigned long irq_freq;
-  static unsigned long irq_cycle = 0; //中断周期
-  // irq_freq = 1 / irq_cycle * 1000000;//计算中断频率
-  // if(irq_freq <= Motor_1.forcedrag_curfreq)//说明换相周期到达
-  // {
-  //   motor_changedir();
-  //   if(Motor_1.forcedrag_curfreq >= FORCEDRAG_STOPFREQ) //强拖到指定转速 保持
-  //   {
-      
-  //   }else{
-  //     Motor_1.forcedrag_curfreq += 10;
-  //   }
-  //   irq_freq = 10;//重新更新中断频率
-  // }else{//更新中断频率
-  //   irq_cycle++;
-  // }
-  if(irq_cycle++ >= 12)
+  static unsigned long irq_T = 50;
+  static unsigned long irq_cnt = 0; //中断周期500us
+  if(irq_cnt * irq_T >= forcedrag_curT)
   {
-    irq_cycle = 0;
+    irq_cnt = 0;
+    if(forcedrag_curT <= 200)//已经达停止转速 保持一段时间 切闭环
+    {
+      forcedrag_curT = 200;
+    }else{
+      forcedrag_curT -= 5;
+    }
     motor_changedir();
+  }else{
+    irq_cnt += 2;
   }
 }
 
-/*电机换相
-ch1-u  ch2-v  ch3-w   5  1  3  2  6  4
+/*
+电机换相
 */
 void motor_changedir(void)
 {

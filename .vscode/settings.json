@@ -2,6 +2,8 @@
   "files.associations": {
     "bldc_driver.h": "c",
     "main.h": "c",
-    "gpio.h": "c"
+    "gpio.h": "c",
+    "usart.h": "c",
+    "adc.h": "c"
   }
 }

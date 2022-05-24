@@ -21,7 +21,7 @@
 #define U_H_PWM_DUTY(Duty) SET_CH1_PWMDUTY(Duty)
 #define V_H_PWM_DUTY(Duty) SET_CH2_PWMDUTY(Duty)
 #define W_H_PWM_DUTY(Duty) SET_CH3_PWMDUTY(Duty)
-#define MIN_DUTY   380   //最小占空比
+#define MIN_DUTY   600   //最小占空比
 #define MID_DUTY   1600
 #define MAX_DUTY   3000  //
 
@@ -30,16 +30,17 @@
 #define MOTOR_DELAY(MS)            HAL_Delay(MS)
 
 
-#define MOTOR_POLEPAIRS                 4
-#define FORCEDRAG_START_ROTATESPEED     600
-#define FORCEDRAG_STOP_ROTATESPEED      1000 
-#define FORCEDRAG_STARTFREQ             (FORCEDRAG_START_ROTATESPEED * MOTOR_POLEPAIRS) / 10
-#define FORCEDRAG_STOPFREQ              (FORCEDRAG_STOP_ROTATESPEED  * MOTOR_POLEPAIRS) / 10
+#define MOTOR_POLEPAIRS                 10
+#define FORCEDRAG_START_ROTATESPEED     1000
+#define FORCEDRAG_STOP_ROTATESPEED      2000 
+#define FORCEDRAG_STARTFREQ             (FORCEDRAG_START_ROTATESPEED * MOTOR_POLEPAIRS) / 10  //1000HZ
+#define FORCEDRAG_STOPFREQ              (FORCEDRAG_STOP_ROTATESPEED  * MOTOR_POLEPAIRS) / 10  //2000HZ
 
+#define FORCEDRAG_START_T              10000000 / (FORCEDRAG_START_ROTATESPEED * MOTOR_POLEPAIRS)   //1000
+#define FORCEDRAG_STOP_T               10000000 / (FORCEDRAG_STOP_ROTATESPEED  * MOTOR_POLEPAIRS)   //500
 typedef struct
 {
   /* data */
-  unsigned char polepairs;//极对数
   unsigned char rotor_location;//转子当前位置
   double forcedrag_curfreq;    //强拖的当前频率
 }Motor_ParamTypeDef;

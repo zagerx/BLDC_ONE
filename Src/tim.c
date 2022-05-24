@@ -136,7 +136,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     __HAL_RCC_TIM14_CLK_ENABLE();
 
     /* TIM14 interrupt Init */
-    HAL_NVIC_SetPriority(TIM14_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(TIM14_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(TIM14_IRQn);
   /* USER CODE BEGIN TIM14_MspInit 1 */
     
@@ -211,17 +211,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     changedir_callbaack();
   }
-  
-  // static unsigned long long cnt;
-  // // if( == &htim14)
-  // {
-  //   RED_ON;
-  //   if(cnt++%211 == 0)
-  //   {
-  //     HAL_GPIO_TogglePin(RGB_GREEN_GPIO_Port,RGB_GREEN_Pin);
-  //   }
-  //   // GREEN_ON;
-  // }
 }
 /* USER CODE END 1 */
 

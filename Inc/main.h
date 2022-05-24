@@ -32,6 +32,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
+#include "math.h"
 
 /* USER CODE END Includes */
 
@@ -83,10 +85,10 @@ void Error_Handler(void);
 #define READ_KEY1()  HAL_GPIO_ReadPin(KEY1_GPIO_Port,KEY1_Pin)
 #define RED_ON       HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
 #define RED_OFF      HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
-
+#define RED_TOGGLE   HAL_GPIO_TogglePin(RGB_RED_GPIO_Port, RGB_RED_Pin)
 #define GREEN_ON     HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_RESET);
 #define GREEN_OFF    HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_SET);
-
+#define GREEN_TOGGLE   HAL_GPIO_TogglePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin)
 // #define RED_ON     HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
 // #define RED_OFF    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
 /* USER CODE END Private defines */

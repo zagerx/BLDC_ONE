@@ -18,11 +18,15 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include"stdio.h"
 #include "bldc_driver.h"
 /* USER CODE END Includes */
 
@@ -86,43 +90,28 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM1_Init();
   MX_TIM14_Init();
+  MX_ADC_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  // HAL_TIM_Base_Start_IT(&htim14);
-  RED_ON;
-  HAL_Delay(3000);
-  RED_OFF;
-  GREEN_ON;
-  motor_start();
+  Motor_ADC_Start_DMA();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // if(READ_KEY1() == GPIO_PIN_SET)
-    // {
-    //   RED_ON;
-    // }else{
-    //   RED_OFF;
-    // }
+    // t += 0.5;
+    // printf("%.2f,%.2f\n", sin(t),sin(1.1*t));
+    GREEN_TOGGLE;
+    HAL_Delay(20);
+    Motor_ADC_Start_DMA();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  // while (pwmVal< 500)
-	//   {
-	// 	  pwmVal++;
-	// 	  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�??
-	// 	  HAL_Delay(1);
-	//   }
-	//   while (pwmVal)
-	//   {
-	// 	  pwmVal--;
-	// 	  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, pwmVal);    //修改比较值，修改占空�??
-	// 	  HAL_Delay(1);
-	//   }
-	//   HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
@@ -139,8 +128,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI14|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSI14State = RCC_HSI14_ON;
+  RCC_OscInitStruct.HSI14CalibrationValue = 16;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL3;
