@@ -34,7 +34,8 @@ extern "C" {
 extern ADC_HandleTypeDef hadc;
 
 /* USER CODE BEGIN Private defines */
-
+#define ADC_START_IT HAL_ADC_Start_IT(&hadc)
+#define ADC_STOP_IT  HAL_ADC_Stop_IT(&hadc)
 /* USER CODE END Private defines */
 
 void MX_ADC_Init(void);

@@ -19,7 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
-#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -90,24 +89,29 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_TIM1_Init();
   MX_TIM14_Init();
   MX_ADC_Init();
   MX_USART2_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  Motor_ADC_Start_DMA();
+  HAL_Delay(3000);
+  RED_ON;
+  GREEN_ON;
+  ADC_START_IT;
+  // SET_CH1_PWMDUTY(MIN_DUTY);SET_CH2_PWMDUTY(MIN_DUTY);SET_CH3_PWMDUTY(MIN_DUTY);
+  // CH1_PWM_START;
+  // CH2_PWM_START;
+  // CH3_PWM_START;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // t += 0.5;
-    // printf("%.2f,%.2f\n", sin(t),sin(1.1*t));
-    GREEN_TOGGLE;
-    HAL_Delay(20);
-    Motor_ADC_Start_DMA();
+    // GREEN_TOGGLE;
+    // HAL_Delay(20);
+  //  Motor_ADC_Start_DMA();
 
     /* USER CODE END WHILE */
 

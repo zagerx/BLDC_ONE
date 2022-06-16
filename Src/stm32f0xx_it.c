@@ -57,7 +57,8 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_adc;
+extern ADC_HandleTypeDef hadc;
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim14;
 /* USER CODE BEGIN EV */
 
@@ -172,17 +173,45 @@ void EXTI2_3_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA1 channel 1 interrupt.
+  * @brief This function handles EXTI line 4 to 15 interrupts.
   */
-void DMA1_Channel1_IRQHandler(void)
+void EXTI4_15_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+  /* USER CODE BEGIN EXTI4_15_IRQn 0 */
 
-  /* USER CODE END DMA1_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_adc);
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+  /* USER CODE END EXTI4_15_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);
+  /* USER CODE BEGIN EXTI4_15_IRQn 1 */
 
-  /* USER CODE END DMA1_Channel1_IRQn 1 */
+  /* USER CODE END EXTI4_15_IRQn 1 */
+}
+
+/**
+  * @brief This function handles ADC and COMP interrupts (COMP interrupts through EXTI lines 21 and 22).
+  */
+void ADC1_COMP_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_COMP_IRQn 0 */
+
+  /* USER CODE END ADC1_COMP_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc);
+  /* USER CODE BEGIN ADC1_COMP_IRQn 1 */
+
+  /* USER CODE END ADC1_COMP_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**
@@ -195,24 +224,10 @@ void TIM14_IRQHandler(void)
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);
   /* USER CODE BEGIN TIM14_IRQn 1 */
-  // RED_ON;
   /* USER CODE END TIM14_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  // static unsigned int i = 0;
-  // if(GPIO_Pin == KEY4_Pin)
-  // {
-  //   if(i%2 != 0)
-  //   {
-  //     RED_OFF;
-  //   }else{
-  //     RED_ON;
-  //   }
-  //   i++;
-  // }
-}
+
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

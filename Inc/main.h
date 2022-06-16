@@ -60,7 +60,15 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define PWM_FREQ 3199
+#define PWM_FREQ 3200
+#define W_AD_CHANNEL_Pin GPIO_PIN_0
+#define W_AD_CHANNEL_GPIO_Port GPIOA
+#define EN_AD_CHANNEL_Pin GPIO_PIN_1
+#define EN_AD_CHANNEL_GPIO_Port GPIOA
+#define V_AD_CHANNEL_Pin GPIO_PIN_4
+#define V_AD_CHANNEL_GPIO_Port GPIOA
+#define U_AD_CHANNEL_Pin GPIO_PIN_5
+#define U_AD_CHANNEL_GPIO_Port GPIOA
 #define U_L_Pin GPIO_PIN_7
 #define U_L_GPIO_Port GPIOA
 #define V_L_Pin GPIO_PIN_0
@@ -77,20 +85,19 @@ void Error_Handler(void);
 #define KEY2_GPIO_Port GPIOC
 #define KEY3_Pin GPIO_PIN_12
 #define KEY3_GPIO_Port GPIOC
+#define KEY3_EXTI_IRQn EXTI4_15_IRQn
 #define KEY4_Pin GPIO_PIN_2
 #define KEY4_GPIO_Port GPIOD
 #define KEY4_EXTI_IRQn EXTI2_3_IRQn
 /* USER CODE BEGIN Private defines */
 
 #define READ_KEY1()  HAL_GPIO_ReadPin(KEY1_GPIO_Port,KEY1_Pin)
-#define RED_ON       HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
-#define RED_OFF      HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
+#define RED_ON       HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET)
+#define RED_OFF      HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET)
 #define RED_TOGGLE   HAL_GPIO_TogglePin(RGB_RED_GPIO_Port, RGB_RED_Pin)
-#define GREEN_ON     HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_RESET);
-#define GREEN_OFF    HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_SET);
+#define GREEN_ON     HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_RESET)
+#define GREEN_OFF    HAL_GPIO_WritePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin, GPIO_PIN_SET)
 #define GREEN_TOGGLE   HAL_GPIO_TogglePin(RGB_GREEN_GPIO_Port, RGB_GREEN_Pin)
-// #define RED_ON     HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_RESET);
-// #define RED_OFF    HAL_GPIO_WritePin(RGB_RED_GPIO_Port, RGB_RED_Pin, GPIO_PIN_SET);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

@@ -32,6 +32,7 @@ extern "C" {
 /* USER CODE END Includes */
 
 extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN Private defines */
@@ -46,9 +47,19 @@ extern TIM_HandleTypeDef htim14;
 #define SET_CH1_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1,duty)
 #define SET_CH2_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2,duty)
 #define SET_CH3_PWMDUTY(duty)  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_3,duty)
+
+
+#define GET_TIM_COUNTER()     __HAL_TIM_GET_COUNTER(&htim2)
+#define SET_TIM_COUNTER(counter)     __HAL_TIM_SET_COUNTER(&htim2,counter)
+#define ENABLE_TIM()          __HAL_TIM_ENABLE(&htim2)
+#define DISABLE_TIM()         __HAL_TIM_DISABLE(&htim2)
+#define ENABLE_TIM_IT()       __HAL_TIM_ENABLE_IT(&htim2,TIM_IT_UPDATE)
+#define DISABLE_TIM_IT()      __HAL_TIM_DISABLE_IT(&htim2,TIM_IT_UPDATE)
+
 /* USER CODE END Private defines */
 
 void MX_TIM1_Init(void);
+void MX_TIM2_Init(void);
 void MX_TIM14_Init(void);
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
